@@ -1,27 +1,38 @@
-# SecondAngular
+# node环境测试​
+  node –v​
+  npm –v​
+​
+# 安装Angular脚手架​
+npm install -g @angular/cli  // 装的是最新的版本​
+npm install -g @angular/cli@xx.xx.x // 也可以安装指定版本​
+ng v  // 验证是否安装成功​
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.4.
+# 创建一个项目并执行​
 
-## Development server
+ng new project_name  --standalone // project_name用户可以自定义项目名​
+cd project_name​
+npm start​
+url: http://localhost:4200 便可看到相关页面
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# DI
+- add logger.service.ts
+- add in providers
+- add in constructure of app.service.ts
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# HttpClient
+- provideHttpClient()  in AppModule
+- proxy.conf.json.
+```javascript
+  getBwics() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        // get from ebidding UI header temporarily
+        Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiVFJBREVSIiwibmFtZSI6IjEyMzQ1NiIsImV4cCI6MTY4NzQ5MTE0OCwidXNlcklkIjoidGVzdC10cmFkZXIifQ.qpXvzorU0gJ5LYhu4VQj4ZWNj9ktQI3Naexc_-ap1EfpFW-1onkezdOWAJAA08XSkSVL8IVNM4DNQUJsibuZSQ'
+      })
+    };
+    this.http.get('/api/v1/bwic/bwic-bid-details',httpOptions).subscribe(data => {
+      console.log(data);
+    });
+  }
+```
