@@ -36,3 +36,49 @@ url: http://localhost:4200 便可看到相关页面
     });
   }
 ```
+
+# Post Request - Login
+1. add in proxy config.json
+    ```json
+    "/api/v1/account": {
+        "target": "http://localhost:80",
+        "secure": false,
+        "changeOrigin": true
+    }
+    ```
+2. add config and interface[app.service.ts]
+   ```typescript
+   export const TokenKey = 'Authorization';
+   export interface APIResult<T> {
+    code: string;
+    message: string;
+    success: boolean;
+    /** auth token */
+    token: string;
+    data: T;
+    }
+
+    export interface UserInfo {
+    id?: string;
+    name: string;
+    memberSince?: string;
+    role: string;
+    token?: string;
+    }
+   ```
+3. add http service[app.service.ts]
+   ```typescript
+     login(params: { username: string; password: string }): Observable<UserInfo> {
+        return this.http.post<APIResult<UserInfo>>('/api/v1/account/login', params)
+        .pipe(
+        filter(res => res.success),
+        map(res =>res.data));
+    }
+   ```
+4. invoke in app.component
+   ```typescript
+     this.appService.login({ username: 'test-trader', password: '123456' })
+        .subscribe((account: UserInfo)=>{
+        sessionStorage.setItem('Authorization', `Bearer ${account.token}`);
+        });
+   ```
