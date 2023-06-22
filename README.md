@@ -82,3 +82,14 @@ url: http://localhost:4200 便可看到相关页面
         sessionStorage.setItem('Authorization', `Bearer ${account.token}`);
         });
    ```
+# Angular Interceptor
+1. add auth/logging interceptors
+2. add interceptors in providers
+   ```typescript
+    provideHttpClient(
+      withInterceptors(
+        [authInterceptor, loggingInterceptor]
+      )
+    ),
+   ``` 
+2. we can remove HttpOption in getBwics method

@@ -29,14 +29,8 @@ export class AppService {
   constructor(private log: Logger, private http: HttpClient) {}
 
   getBwics() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: sessionStorage.getItem(TokenKey)!,
-        // Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiVFJBREVSIiwibmFtZSI6IjEyMzQ1NiIsImV4cCI6MTY4NzQ5MTE0OCwidXNlcklkIjoidGVzdC10cmFkZXIifQ.qpXvzorU0gJ5LYhu4VQj4ZWNj9ktQI3Naexc_-ap1EfpFW-1onkezdOWAJAA08XSkSVL8IVNM4DNQUJsibuZSQ'
-      }),
-    };
     this.http
-      .get('/api/v1/bwic/bwic-bid-details', httpOptions)
+      .get('/api/v1/bwic/bwic-bid-details')
       .subscribe((data) => {
         console.log(data);
       });
