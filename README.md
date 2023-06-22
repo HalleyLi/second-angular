@@ -93,3 +93,11 @@ url: http://localhost:4200 便可看到相关页面
     ),
    ``` 
 2. we can remove HttpOption in getBwics method
+
+# Mockjs setup
+1. npm i mockjs @types/mockjs --save-dev
+2. add mock files under src/mock
+3. set allowSyntheticDefaultImports: true in tsconfig.json
+   1. desc: Allow 'import x from y' when a module doesn't have a default export.
+   2. import Mock from 'mockjs';
+4. import './mock' in main.ts file
