@@ -44,6 +44,7 @@ export class AppService {
   }
 
   getHeroes() {
+    const logService = new Logger();
     this.log.log(`hello, this is injected log`);
     return [''];
   }
